@@ -1,6 +1,8 @@
 import os
+import cv2
 
-UPLOAD_FOLDER = 'upload'
+UPLOAD_FOLDER = 'uploads'
+#SKETCH_FOLDER = 'sketches'
 
 
 def create_upload_folder():

@@ -1,9 +1,5 @@
 import cv2
-import os
-import numpy as np
-import cv2
 
-UPLOAD_FOLDER = 'upload'
 ALLOWED_EXTENSION = {'png', 'jpg', 'jpeg'}
 
 
