@@ -1,12 +1,14 @@
 import os
 import cv2
 
+# Upload folders
 UPLOAD_FOLDER = 'uploads'
-#SKETCH_FOLDER = 'sketches'
+SKETCH_FOLDER = 'sketches'
 
 
-def create_upload_folder():
+def create_folders():
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    os.makedirs(SKETCH_FOLDER, exist_ok=True)
 
 
 def save_uploaded_file(file):
@@ -16,7 +18,7 @@ def save_uploaded_file(file):
 
 
 def save_sketch(sketch):
-    sketch_path = os.path.join(UPLOAD_FOLDER, 'sketch.png')
+    sketch_path = os.path.join(SKETCH_FOLDER, 'sketch.png')
     cv2.imwrite(sketch_path, sketch)
     return sketch_path
 
