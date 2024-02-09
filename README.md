@@ -1,2 +1,8 @@
-# Image_to_a_pencil_sketches
-API for converting images to a pencil sketches 
+# Image to sketch
+A python script for transforming image to sketches.
+
+The application allows adding, modifying, deleting photos.
+Image manipulations are possible in several of the popular formats.
+
+Additional features should be added.
+...
