@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Flask Web App</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencil Sketch App</title>
 </head>
 <body>
-    <h1>Welcome to my Flask web app!</h1>
-    <p>This is a sample web page.</p>
+    <h1>Pencil Sketch App</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <label for="file">Choose an image:</label>
+        <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg, .gif" required>
+        <button type="submit">Upload and Transform</button>
+    </form>
+
+    {% if original_file %}
+        <h2>Original Image:</h2>
+        <img src="{{ original_file }}" alt="Original Image" style="max-width: 500px;">
+
+        {% if sketch_file %}
+            <h2>Pencil Sketch:</h2>
+            <img src="{{ sketch_file }}" alt="Pencil Sketch" style="max-width: 500px;">
+        {% endif %}
+    {% endif %}
 </body>
 </html>
