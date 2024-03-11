@@ -1,7 +1,6 @@
-from services.image_service import transform_to_pencil_sketch, allowed_file
-from services.file_service import save_uploaded_file, save_sketch, delete_file
-from flask import Blueprint, request, jsonify
-
+from backend.services.image_service import transform_to_pencil_sketch, allowed_file
+from backend.services.file_service import save_uploaded_file, save_sketch, delete_file
+from flask import Blueprint, request, jsonify, render_template
 
 file_router = Blueprint('file', __name__)
 
@@ -13,9 +12,10 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@file_router.route('/', methods=['GET', 'POST'])
+@file_router.route('/', methods=['GET'])
 def home():
-    return {"Welcome": "Welcome to my Flask web app!"}
+    # return {"Welcome": "Welcome to my Flask web app!"}
+    return render_template('home.html')
 
 
 @file_router.route('/upload', methods=['POST'])
