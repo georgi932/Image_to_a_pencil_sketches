@@ -4,16 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pencil Sketch App</title>
+    <title>Result - Pencil Sketch App</title>
 </head>
 <body>
-    <h1>Pencil Sketch App</h1>
-
-    <form method="post" action="{{ url_for('file.upload_file') }}" enctype="multipart/form-data">
-        <label for="file">Choose an image:</label>
-        <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg, .gif" required>
-        <button type="submit">Upload and Transform</button>
-    </form>
+    <h1>Result - Pencil Sketch App</h1>
 
     {% if original_file %}
         <h2>Original Image:</h2>

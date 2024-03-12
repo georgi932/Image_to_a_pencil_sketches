@@ -38,7 +38,8 @@ def upload_file():
         # Save the sketch
         sketch_path = save_sketch(sketch)
 
-        return jsonify({'sketch_url': sketch_path})
+        # return jsonify({'sketch_url': sketch_path})
+        return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
 
     return jsonify({'error': 'Invalid file format!'})
 
