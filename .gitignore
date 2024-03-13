@@ -160,3 +160,7 @@ cython_debug/
 #.idea/
 
 .txt
+.png
+.jpg
+.jpeg
+.gif

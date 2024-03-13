@@ -1,5 +1,5 @@
 from backend.services.image_service import transform_to_pencil_sketch, allowed_file
-from backend.services.file_service import save_uploaded_file, save_sketch, delete_file
+from backend.services.file_service import save_uploaded_file, save_sketch, delete_file, create_folders
 from flask import Blueprint, request, jsonify, render_template
 
 file_router = Blueprint('file', __name__)
@@ -27,6 +27,8 @@ def upload_file():
 
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
+
+    folder = create_folders()
 
     if file and allowed_file(file.filename):
         # Save the uploaded file
