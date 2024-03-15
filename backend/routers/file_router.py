@@ -1,4 +1,4 @@
-from backend.services.image_service import transform_to_pencil_sketch, allowed_file
+from backend.services.image_service import transform_to_pencil_sketch, allowed_file, transform_to_grayscale
 from backend.services.file_service import save_uploaded_file, save_sketch, delete_file, create_folders
 from flask import Blueprint, request, jsonify, render_template
 
@@ -44,6 +44,39 @@ def upload_file():
         return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
 
     return jsonify({'error': 'Invalid file format!'})
+
+# @file_router.route('/upload', methods=['POST'])
+# def upload_file():
+#     if 'file' not in request.files:
+#         return jsonify({'error': 'No file part'})
+#
+#     file = request.files['file']
+#
+#     if file.filename == '':
+#         return jsonify({'error': 'No selected file'})
+#
+#     folder = create_folders()
+#
+#     if file and allowed_file(file.filename):
+#         # Save the uploaded file
+#         file_path = save_uploaded_file(file)
+#
+#         # Specify the transformation type (default to pencil sketch)
+#         transformation_type = request.args.get('transformation', 'pencil_sketch')
+#
+#         # Perform the selected transformation
+#         if transformation_type == 'pencil_sketch':
+#             transformed_image = transform_to_pencil_sketch(file_path)
+#         elif transformation_type == 'grayscale':
+#             transformation_image = transform_to_grayscale(file_path)
+#
+#         # Save the transformed image
+#         transformed_path = save_sketch(transformed_image)
+#
+#         # return jsonify({'sketch_url': sketch_path})
+#         return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
+#
+#     return jsonify({'error': 'Invalid file format!'})
 
 
 @file_router.route('/delete/<filename>', methods=['DELETE'])
