@@ -1,3 +1,32 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta http-equiv="X-UA-Compatible" content="IE=edge">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1.0">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Pencil Sketch App</title>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;    <h1>Pencil Sketch App</h1>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <form method="post" action="{{ url_for('file.upload_file') }}" enctype="multipart/form-data">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label for="file">Choose an image:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg, .gif" required>&ndash;&gt;-->
+<!--&lt;!&ndash;        <button type="submit">Upload and Transform</button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </form>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    {% if original_file %}&ndash;&gt;-->
+<!--&lt;!&ndash;        <h2>Original Image:</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;        <img src="{{ original_file }}" alt="Original Image" style="max-width: 500px;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;        {% if sketch_file %}&ndash;&gt;-->
+<!--&lt;!&ndash;            <h2>Pencil Sketch:</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;            <img src="{{ sketch_file }}" alt="Pencil Sketch" style="max-width: 500px;">&ndash;&gt;-->
+<!--&lt;!&ndash;        {% endif %}&ndash;&gt;-->
+<!--&lt;!&ndash;    {% endif %}&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <!--<head>-->
@@ -5,25 +34,86 @@
 <!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
 <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 <!--    <title>Pencil Sketch App</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f2f2f2;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+<!--        .header {-->
+<!--            background-color: #2980b9;-->
+<!--            color: white;-->
+<!--            padding: 20px;-->
+<!--            text-align: center;-->
+<!--        }-->
+<!--        .container {-->
+<!--            max-width: 600px;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 20px;-->
+<!--            background-color: #fff;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);-->
+<!--            margin-top: 50px;-->
+<!--        }-->
+<!--        .upload-form {-->
+<!--            text-align: center;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+<!--        .upload-form label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 10px;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+<!--        .upload-form input[type="file"] {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+<!--        .upload-form button[type="submit"] {-->
+<!--            background-color: #2980b9;-->
+<!--            color: white;-->
+<!--            padding: 10px 20px;-->
+<!--            border: none;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+<!--        .upload-form button[type="submit"]:hover {-->
+<!--            background-color: #1c6ca7;-->
+<!--        }-->
+<!--        .result-images {-->
+<!--            text-align: center;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+<!--        .result-images img {-->
+<!--            max-width: 100%;-->
+<!--            border-radius: 8px;-->
+<!--            margin-top: 10px;-->
+<!--        }-->
+<!--    </style>-->
 <!--</head>-->
 <!--<body>-->
-<!--    <h1>Pencil Sketch App</h1>-->
+<!--    <div class="header">-->
+<!--        <h1>Pencil Sketch App</h1>-->
+<!--    </div>-->
 
-<!--    <form method="post" action="{{ url_for('file.upload_file') }}" enctype="multipart/form-data">-->
-<!--        <label for="file">Choose an image:</label>-->
-<!--        <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg, .gif" required>-->
-<!--        <button type="submit">Upload and Transform</button>-->
-<!--    </form>-->
+<!--    <div class="container">-->
+<!--        <form class="upload-form" method="post" action="{{ url_for('file.upload_file') }}" enctype="multipart/form-data">-->
+<!--            <label for="file">Choose an image:</label>-->
+<!--            <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg, .gif" required>-->
+<!--            <button type="submit">Upload and Transform</button>-->
+<!--        </form>-->
 
-<!--    {% if original_file %}-->
-<!--        <h2>Original Image:</h2>-->
-<!--        <img src="{{ original_file }}" alt="Original Image" style="max-width: 500px;">-->
+<!--        {% if original_file %}-->
+<!--            <div class="result-images">-->
+<!--                <h2>Original Image:</h2>-->
+<!--                <img src="{{ original_file }}" alt="Original Image">-->
 
-<!--        {% if sketch_file %}-->
-<!--            <h2>Pencil Sketch:</h2>-->
-<!--            <img src="{{ sketch_file }}" alt="Pencil Sketch" style="max-width: 500px;">-->
+<!--                {% if sketch_file %}-->
+<!--                    <h2>Pencil Sketch:</h2>-->
+<!--                    <img src="{{ sketch_file }}" alt="Pencil Sketch">-->
+<!--                {% endif %}-->
+<!--            </div>-->
 <!--        {% endif %}-->
-<!--    {% endif %}-->
+<!--    </div>-->
 <!--</body>-->
 <!--</html>-->
 
@@ -37,9 +127,12 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
             margin: 0;
             padding: 0;
+            background-image: url("/static/background.jpg");
+            background-size: 600px 400px; /* Scale the background image to cover the entire container */
+            background-position: center top 350px; /* Center the background image horizontally and move it down by 50px */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
         }
         .header {
             background-color: #2980b9;
@@ -79,6 +172,22 @@
         .upload-form button[type="submit"]:hover {
             background-color: #1c6ca7;
         }
+        .transform-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .transform-buttons button {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .transform-buttons button:hover {
+            background-color: #1c6ca7;
+        }
         .result-images {
             text-align: center;
             margin-top: 20px;
@@ -101,6 +210,12 @@
             <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg, .gif" required>
             <button type="submit">Upload and Transform</button>
         </form>
+
+        <div class="transform-buttons">
+            <button>Button 1</button>
+            <button>Button 2</button>
+            <button>Delete file</button>
+        </div>
 
         {% if original_file %}
             <div class="result-images">
