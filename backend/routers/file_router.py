@@ -60,3 +60,6 @@ def transform_file(file_path):
     # Save the sketch
     sketch_path = save_sketch(sketch)
     return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
+
+
+@file_router.route('/')

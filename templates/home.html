@@ -158,7 +158,7 @@
             margin-bottom: 20px;
         }
         .upload-form button[type="submit"] {
-            background-color: #2980b9;
+            background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -233,7 +233,7 @@
         <form class="upload-form" method="post" action="{{ url_for('file.upload_file') }}" enctype="multipart/form-data">
             <label for="file">Choose an image:</label>
             <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg, .gif" required>
-            <button type="submit">Upload and Transform</button>
+            <button type="submit" onclick="uploadFile()">Upload</button>
         </form>
 
         <div class="transform-buttons">
@@ -248,7 +248,7 @@
                     <button onclick="applyFilter('grayscale')">Grayscale</button>
                 </div>
             </div>
-            <button>Button 2</button>
+            <button>Sketch</button>
             <button>Delete file</button>
         </div>
 
