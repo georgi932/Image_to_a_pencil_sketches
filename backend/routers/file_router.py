@@ -1,6 +1,6 @@
 from backend.services.image_service import transform_to_pencil_sketch, allowed_file, transform_to_grayscale
 from backend.services.file_service import save_uploaded_file, save_sketch, delete_file, create_folders
-from flask import Blueprint, request, jsonify, render_template
+from flask import Blueprint, request, jsonify, render_template, redirect
 
 file_router = Blueprint('file', __name__)
 
@@ -40,11 +40,15 @@ def upload_file():
         # # Save the sketch
         # sketch_path = save_sketch(sketch)
 
-        return jsonify({'redirect_url': '/transform' + file_path})
+        return redirect(request.referrer)
+
+    return redirect(request.referrer)
+
+        # return jsonify({'redirect_url': '/transform' + file_path})
 
         # return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
 
-    return jsonify({'error': 'Invalid file format!'})
+    # return jsonify({'error': 'Invalid file format!'})
 
 
 @file_router.route('/delete/<filename>', methods=['DELETE'])
@@ -60,6 +64,3 @@ def transform_file(file_path):
     # Save the sketch
     sketch_path = save_sketch(sketch)
     return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
-
-
-@file_router.route('/')
