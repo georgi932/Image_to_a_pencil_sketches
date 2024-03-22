@@ -248,7 +248,8 @@
                     <button onclick="applyFilter('grayscale')">Grayscale</button>
                 </div>
             </div>
-            <button id="sketchButton">Sketch</button>
+            <button id="sketchButton" data-file-path="{{ original_file }}">Sketch</button>
+
             <button>Delete file</button>
         </div>
 
@@ -282,6 +283,26 @@
             //     }
             // });
         }
+        // Function to handle click event on Sketch button
+        document.getElementById("sketchButton").addEventListener("click", function() {
+            var filePath = this.dataset.filePath;
+
+            // Make an AJAX request to the server
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/sketch", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // Request was successful, handle response if needed
+                    } else {
+                        // Request failed, handle error
+                    }
+                }
+            };
+            xhr.send(JSON.stringify({ file_path: filePath }));
+        });
+
     </script>
 </body>
 </html>

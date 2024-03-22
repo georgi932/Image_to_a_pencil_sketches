@@ -1,3 +1,5 @@
+import os
+
 from backend.services.image_service import transform_to_pencil_sketch, allowed_file, transform_to_grayscale
 from backend.services.file_service import save_uploaded_file, save_sketch, delete_file, create_folders
 from flask import Blueprint, request, jsonify, render_template, redirect
@@ -5,7 +7,7 @@ from flask import Blueprint, request, jsonify, render_template, redirect
 file_router = Blueprint('file', __name__)
 
 # Allowed file extensions
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'''}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
 def allowed_file(filename):
@@ -56,11 +58,23 @@ def delete_uploaded_file(filename):
     return jsonify({'message': delete_file(filename)})
 
 
-@file_router.route('/transform/<path:file_path>')
-def transform_file(file_path):
+@file_router.route('/sketch', methods=['POST'])
+def sketch_file():
+
+    upload_dir = 'uploads'
+    uploaded_files = os.listdir(upload_dir)
+
+    # Assuming there's only one file uploaded, you can take the first file from the list
+    if uploaded_files:
+        file_name = uploaded_files[0]
+        file_path = os.path.join(upload_dir, file_name)
+    else:
+        return "No files uploaded"
+
     # Transform the image to a pencil sketch
     sketch = transform_to_pencil_sketch(file_path)
 
     # Save the sketch
     sketch_path = save_sketch(sketch)
+
     return render_template('result.html', original_file=file_path, sketch_file=sketch_path)

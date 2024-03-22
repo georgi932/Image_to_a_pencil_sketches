@@ -1,7 +1,7 @@
 import cv2
 from PIL import Image
 
-ALLOWED_EXTENSION = {'png', 'jpg', 'jpeg'}
+ALLOWED_EXTENSION = {'png', 'jpg', 'jpeg', 'gif'}
 
 
 def allowed_file(filename):
