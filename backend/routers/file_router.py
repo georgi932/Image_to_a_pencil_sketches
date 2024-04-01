@@ -1,8 +1,7 @@
 import os
-
-from backend.services.image_service import transform_to_pencil_sketch, allowed_file, transform_to_grayscale
+from backend.services.image_service import transform_to_pencil_sketch, allowed_file
 from backend.services.file_service import save_uploaded_file, save_sketch, delete_file, create_folders
-from flask import Blueprint, request, jsonify, render_template, redirect
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for
 
 file_router = Blueprint('file', __name__)
 
@@ -10,13 +9,12 @@ file_router = Blueprint('file', __name__)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+# def allowed_file(filename):
+#     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @file_router.route('/', methods=['GET'])
 def home():
-    # return {"Welcome": "Welcome to my Flask web app!"}
     return render_template('home.html')
 
 
@@ -69,7 +67,7 @@ def sketch_file():
         file_name = uploaded_files[0]
         file_path = os.path.join(upload_dir, file_name)
     else:
-        return "No files uploaded"
+        return jsonify({"error": "No files uploaded"})
 
     # Transform the image to a pencil sketch
     sketch = transform_to_pencil_sketch(file_path)
@@ -77,4 +75,12 @@ def sketch_file():
     # Save the sketch
     sketch_path = save_sketch(sketch)
 
-    return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
+    return redirect(url_for('result.html', original_file=file_path, sketch_file=sketch_path))
+    # return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
+
+    # return redirect(url_for('file.result_page'))
+
+
+# @file_router.route('/result', methods=['GET'])
+# def result_page():
+#     return render_template('result.html')
