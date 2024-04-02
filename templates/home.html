@@ -151,33 +151,33 @@
         {% endif %}
     </div>
         <script>
-        document.getElementById("sketchButton").addEventListener("click", function() {
-            var filePath = this.dataset.filePath;
+                document.getElementById("sketchButton").addEventListener("click", function() {
+                    // Redirect to the sketch endpoint
+                    window.location.href = "/sketch";
+                });
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/sketch", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
+<!--            document.getElementById("sketchButton").addEventListener("click", function() {-->
+<!--                var filePath = this.dataset.filePath;-->
 
-<!--                        var response = JSON.parse(xhr.responseText);-->
-<!--                        var originalImagePath = response.original_file;-->
-<!--                        var sketchImagePath = response.sketch_file;-->
+<!--                var xhr = new XMLHttpRequest();-->
+<!--                xhr.open("POST", "/sketch", true);-->
+<!--                xhr.setRequestHeader("Content-Type", "application/json");-->
+<!--                xhr.onreadystatechange = function()-->
+<!--                {-->
+<!--                    if (xhr.readyState === 4) {-->
+<!--                        if (xhr.status === 200)-->
+<!--                        {-->
+<!--                            // Redirect to the result page-->
+<!--                            window.location.href = "/result";-->
+<!--                        } else {-->
+<!--                            // Handle error-->
+<!--                            console.error("Error: Unable to get sketch result");-->
+<!--                        }-->
+<!--                 }-->
+<!--                };-->
+<!--                xhr.send(JSON.stringify({ file_path: filePath }));-->
+<!--            });-->
 
-<!--                        document.getElementById("originalImage").src = originalImagePath;-->
-<!--                        document.getElementById("sketchImage").src = sketchImagePath;-->
-
-                        // Redirect to the result page
-<!--                        window.location.href = "/result";-->
-                    } else {
-                        // Handle error
-                        console.error("Error: Unable to get sketch result");
-                    }
-                }
-            };
-            xhr.send(JSON.stringify({ file_path: filePath }));
-        });
     </script>
 </body>
 </html>
