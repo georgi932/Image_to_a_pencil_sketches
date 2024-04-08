@@ -8,15 +8,10 @@
 </head>
 <body>
     <h1>Result - Pencil Sketch App</h1>
-
-    {% if original_file %}
-        <h2>Original Image:</h2>
-        <img src="{{ original_file }}" alt="Original Image" style="max-width: 500px;">
-
-        {% if sketch_file %}
-            <h2>Pencil Sketch:</h2>
-            <img src="{{ sketch_file }}" alt="Pencil Sketch" style="max-width: 500px;">
-        {% endif %}
-    {% endif %}
+    <h2>Original Image</h2>
+    <img src="{{ url_for('static', filename=original_file.split('static/')[1]) }}" alt="Pencil Sketch" width="400">
+    <h2>Pencil Sketch</h2>
+    <img src="{{ url_for('static', filename=sketch_file.split('static/')[1]) }}" alt="Pencil Sketch" width="400">
+<!--    <img src="{{ url_for('static', filename=sketch_file) }}" alt="Pencil Sketch" width="400">-->
 </body>
 </html>
