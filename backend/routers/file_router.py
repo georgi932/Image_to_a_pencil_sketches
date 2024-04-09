@@ -1,12 +1,13 @@
-import os
-from backend.services.image_service import transform_to_pencil_sketch, allowed_file
+import cv2
+
+from backend.services.image_service import transform_to_pencil_sketch, allowed_file, apply_filter
 from backend.services.file_service import save_uploaded_file, save_sketch, delete_file, create_folders, get_file_path
-from flask import Blueprint, request, jsonify, render_template, redirect, send_from_directory
+from flask import Blueprint, request, jsonify, render_template, redirect
 
 file_router = Blueprint('file', __name__)
 
 # Allowed file extensions
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+# ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
 @file_router.route('/', methods=['GET'])
@@ -52,3 +53,23 @@ def sketch_file():
 
     return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
 
+
+# TO BE CONNECTED
+@file_router.route('filters', methods=['POST'])
+def filters():
+    data = request.json
+    filter_type = data.get('filter_type')
+    # image_path = data.get('image_path')
+    image_path = get_file_path()
+
+    # Load the image
+    input_image = cv2.imread(image_path)
+
+    # Apply the desired filter
+    filtered_image = apply_filter(input_image, filter_type)
+
+    # Convert the filtered image to bytes
+    ret, buffer = cv2.imencode('.png', filtered_image)
+    filtered_image_bytes = buffer.tobytes()
+
+    return filtered_image_bytes, 200

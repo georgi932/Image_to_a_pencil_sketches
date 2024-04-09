@@ -39,6 +39,7 @@ def save_sketch(sketch):
     return sketch_path
 
 
+# --- To be implemented ---
 def delete_file(filename):
     file_path = os.path.join(UPLOAD_FOLDER, filename)
     try:

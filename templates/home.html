@@ -156,28 +156,38 @@
                     window.location.href = "/sketch";
                 });
 
-<!--            document.getElementById("sketchButton").addEventListener("click", function() {-->
-<!--                var filePath = this.dataset.filePath;-->
+    </script>
+    <script>
+        function applyFilter(filterType) {
+            // Prepare the data to be sent
+            const data = {
+               filter_type: filterType
+          };
 
-<!--                var xhr = new XMLHttpRequest();-->
-<!--                xhr.open("POST", "/sketch", true);-->
-<!--                xhr.setRequestHeader("Content-Type", "application/json");-->
-<!--                xhr.onreadystatechange = function()-->
-<!--                {-->
-<!--                    if (xhr.readyState === 4) {-->
-<!--                        if (xhr.status === 200)-->
-<!--                        {-->
-<!--                            // Redirect to the result page-->
-<!--                            window.location.href = "/result";-->
-<!--                        } else {-->
-<!--                            // Handle error-->
-<!--                            console.error("Error: Unable to get sketch result");-->
-<!--                        }-->
-<!--                 }-->
-<!--                };-->
-<!--                xhr.send(JSON.stringify({ file_path: filePath }));-->
-<!--            });-->
-
+          // Send a POST request to the backend
+          fetch('/filters', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+             body: JSON.stringify(data)
+          })
+           .then(response => {
+              if (response.ok) {
+                  return response.blob(); // Convert response to blob
+              }
+              throw new Error('Network response was not ok.');
+          })
+          .then(blob => {
+              // Create URL for the blob
+               const url = URL.createObjectURL(blob);
+               // Display the filtered image
+               document.getElementById('filteredImage').src = url;
+           })
+          .catch(error => {
+              console.error('There was a problem with the fetch operation:', error);
+          });
+     }
     </script>
 </body>
 </html>
