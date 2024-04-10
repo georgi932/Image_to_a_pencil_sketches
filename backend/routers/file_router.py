@@ -54,16 +54,15 @@ def sketch_file():
     return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
 
 
-# TO BE CONNECTED
-@file_router.route('filters', methods=['POST'])
+@file_router.route('/filters', methods=['GET', 'POST'])
 def filters():
     data = request.json
     filter_type = data.get('filter_type')
     # image_path = data.get('image_path')
-    image_path = get_file_path()
+    file_path = get_file_path()
 
     # Load the image
-    input_image = cv2.imread(image_path)
+    input_image = cv2.imread(file_path)
 
     # Apply the desired filter
     filtered_image = apply_filter(input_image, filter_type)
@@ -71,5 +70,8 @@ def filters():
     # Convert the filtered image to bytes
     ret, buffer = cv2.imencode('.png', filtered_image)
     filtered_image_bytes = buffer.tobytes()
+    sketch_path = save_sketch(filtered_image_bytes)
 
-    return filtered_image_bytes, 200
+    # return filtered_image_bytes, 200
+    # return sketch_path
+    return render_template('result.html', original_file=file_path, sketch_file=sketch_path)

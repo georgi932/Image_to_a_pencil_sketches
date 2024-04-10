@@ -33,10 +33,34 @@ def save_sketch(sketch):
 
     sketch_path = os.path.join(SKETCH_FOLDER, 'sketch.png')
 
-    sketch_path = sketch_path.replace('\\', '/')
+    # Check if the image_data is bytes or numpy array
+    if isinstance(sketch, bytes):
 
-    cv2.imwrite(sketch_path, sketch)
+        # If image_data is bytes, decode it to numpy array
+        image_array = np.frombuffer(sketch, dtype=np.uint8)
+        image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+    elif isinstance(sketch, np.ndarray):
+
+        # If image_data is numpy array, directly assign it
+        image = sketch
+    else:
+        raise ValueError("Unsupported image data format")
+
+    # Save the image
+    cv2.imwrite(sketch_path, image)
+    sketch_path = sketch_path.replace('\\', '/')
     return sketch_path
+
+    # sketch_path = sketch_path.replace('\\', '/')
+    #
+    # # Decode the image bytes to a NumPy array
+    # sketch_array = np.frombuffer(sketch, dtype=np.uint8)
+    #
+    # # Reshape the array to match the image dimensions
+    # sketch_image = cv2.imdecode(sketch_array, cv2.IMREAD_COLOR)
+    #
+    # cv2.imwrite(sketch_path, sketch_image)
+    # return sketch_path
 
 
 # --- To be implemented ---

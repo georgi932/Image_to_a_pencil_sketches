@@ -31,22 +31,27 @@ def transform_to_pencil_sketch(image_path):
 #     return Image.fromarray
 
 
-# ---To be connected  to the router and to the buttons---
 def apply_filter(image, filter_type):
     if filter_type == "blur":
         return cv2.blur(image, (5, 5))  # Applying a blur filter
+
     elif filter_type == "sharpen":
         kernel = np.array([[-1, -1, -1],
                            [-1, 9, -1],
                            [-1, -1, -1]])
-        return cv2.filter2D(image, -1, kernel)  # Applying a sharpen filter
+        result = cv2.filter2D(image, -1, kernel)
+        return result
+        # return cv2.filter2D(image, -1, kernel)  # Applying a sharpen filter
+
     elif filter_type == "edge":
         return cv2.Canny(image, 100, 200)  # Applying an edge detection filter
+
     elif filter_type == "emboss":
         kernel = np.array([[-2, -1, 0],
                            [-1, 1, 1],
                            [0, 1, 2]])
         return cv2.filter2D(image, -1, kernel)  # Applying an emboss filter
+
     elif filter_type == "sepia":
         kernel = np.array([[0.393, 0.769, 0.189],
                            [0.349, 0.686, 0.168],
@@ -54,6 +59,7 @@ def apply_filter(image, filter_type):
         sepia_image = cv2.transform(image, kernel)
         sepia_image = cv2.cvtColor(sepia_image, cv2.COLOR_BGR2RGB)
         return sepia_image  # Applying a sepia tone filter
+
     elif filter_type == "grayscale":
         return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # Converting to grayscale
     else:

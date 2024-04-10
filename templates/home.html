@@ -172,21 +172,19 @@
               },
              body: JSON.stringify(data)
           })
-           .then(response => {
-              if (response.ok) {
-                  return response.blob(); // Convert response to blob
-              }
-              throw new Error('Network response was not ok.');
-          })
-          .then(blob => {
-              // Create URL for the blob
-               const url = URL.createObjectURL(blob);
-               // Display the filtered image
-               document.getElementById('filteredImage').src = url;
-           })
-          .catch(error => {
-              console.error('There was a problem with the fetch operation:', error);
-          });
+          .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to apply filter');
+            }
+            return response.text(); // Assuming the response contains the updated HTML
+        })
+        .then(html => {
+            // Update the result section with the updated HTML
+            document.getElementById('result-section').innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
      }
     </script>
 </body>

@@ -1,4 +1,4 @@
-# Image to sketch
+# Image to Sketch
 A python script for transforming image to sketches.
 
 The application allows adding, modifying, deleting photos.
