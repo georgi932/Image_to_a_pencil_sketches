@@ -157,22 +157,28 @@
                 });
 
     </script>
-    <script>
-        function applyFilter(filterType) {
-            // Prepare the data to be sent
-            const data = {
-               filter_type: filterType
-          };
 
-          // Send a POST request to the backend
-          fetch('/filters', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-             body: JSON.stringify(data)
-          })
-          .then(response => {
+    <script>
+    document.getElementById("filtersButton").addEventListener("click", function() {
+        // Call applyFilter with the desired filter type
+        applyFilter('your_filter_type_here');
+    });
+
+    function applyFilter(filterType) {
+        // Prepare the data to be sent
+        const data = {
+            filter_type: filterType
+        };
+
+        // Send a POST request to the backend
+        fetch('/filters', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to apply filter');
             }
@@ -185,7 +191,8 @@
         .catch(error => {
             console.error('Error:', error);
         });
-     }
-    </script>
+
+    }
+</script>
 </body>
 </html>

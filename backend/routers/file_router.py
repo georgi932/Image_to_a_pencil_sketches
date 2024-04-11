@@ -6,9 +6,6 @@ from flask import Blueprint, request, jsonify, render_template, redirect
 
 file_router = Blueprint('file', __name__)
 
-# Allowed file extensions
-# ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-
 
 @file_router.route('/', methods=['GET'])
 def home():
@@ -58,7 +55,6 @@ def sketch_file():
 def filters():
     data = request.json
     filter_type = data.get('filter_type')
-    # image_path = data.get('image_path')
     file_path = get_file_path()
 
     # Load the image
@@ -70,8 +66,8 @@ def filters():
     # Convert the filtered image to bytes
     ret, buffer = cv2.imencode('.png', filtered_image)
     filtered_image_bytes = buffer.tobytes()
+
+    # Save the filtered image
     sketch_path = save_sketch(filtered_image_bytes)
 
-    # return filtered_image_bytes, 200
-    # return sketch_path
     return render_template('result.html', original_file=file_path, sketch_file=sketch_path)
