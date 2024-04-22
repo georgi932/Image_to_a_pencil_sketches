@@ -7,6 +7,7 @@ Image to sketch is an image manipulation API designed in Python. The application
 - Press the Run button or use the Terminal command line to run the application manually
 - When the application is successfully launched, you can directly click on the displayed URL http://127.0.0.1:5000, or copy it to your chosen browser
 - When you launch the browser, you can navigate through the app functionalities
+![img.png](img.png)
 
 ## 3. Technologies used
 ``Flask, OpenCV, NumPy``
